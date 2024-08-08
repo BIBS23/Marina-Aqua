@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Django To Do List App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  background-color: rgb(40 40 43 / 100%);
+}
+
+.main {
+
+display: flex;
+flex-direction: column;
+margin-top: 20px;
+
+
+  align-items: center;
+
+
+
+}
+
+
+
+ul {
+  
+
+  padding: 0;
+ min-height: 100%;
+ width: 36%;
+ border-radius: 12px;
+  scroll-behavior: smooth;
+  background-color: #ffc701;
+  overflow-y: auto;
+  margin: 70px,20px,12px,12px;
+  list-style: none;
+}
+
+ul {
+  scrollbar-width: none; /* Firefox */
+}
+
+ul li {
+  cursor: pointer;
+
+  padding: 19px;
+  list-style-type: none;
+  background: #eee;
+  font-size: 18px;
+  margin: 10px;
+  border-radius: 12px;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+
+  
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+ul li:nth-child(odd) {
+  background: #f9f9f9;
+}
+
+
+ul li:hover {
+  background: #ddd;
+}
+
+
+ul li.checked {
+  background: #888;
+  color: #fff;
+  text-decoration: line-through;
+}
+
+
+ul li.checked::before {
+  content: '';
+
+  border-color: #fff;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+}
+
+.close {
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+}
+
+.close:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+.header {
+  background-color: #ffc701;
+  color: white;
+  border-radius: 12px;
+  text-align: center;
+}
+
+
+.header:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+
+
+input {
+  margin: 10px;
+  border: none;
+  border-radius: 12px;
+  width: 75%;
+  padding: 10px;
+  font-size: 16px;
+}
+
+
+.addBtn {
+  padding: 10px;
+  margin: 10px;
+  width: 25%;
+  background: #d9d9d9;
+  color: #555;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 12px;
+}
+
+.addBtn:hover {
+  background-color: #bbb;
+}
+</style>
+</head>
+<body>
+
+<div class="main">
+<div id="myDIV" class="header">
+  <h2 style="margin:5px">Django To Do List App</h2>
+  <form action="add/" method="POST">
+    {% csrf_token %}
+    <input type="text" name="title" id="myInput" placeholder="Title...">
+    <input type="text" name="description" id="myInput" placeholder="Description...">
+    <button type="submit" class="addBtn">Add</button>
+  </form>
+</div>
+
+<ul id="myUL">
+  {% for todo in todos reversed %}
+  <li>{{todo.title | title}}    <br> 
+    {{todo.descriptions }}<br>
+    Created at: {{ todo.createdAt }}
+   <span class="close"><a style="text-decoration: none; color: black;" href="delete/{{todo.id}}">Delete</a></span>
+    </li>
+  {% endfor %}
+</ul>
+</div>
+
+
+</body>
+</html>
