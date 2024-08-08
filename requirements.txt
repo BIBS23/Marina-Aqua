@@ -1,5 +1,5 @@
 django
 psycopg2
-environ
+django-environ
 gunicorn
 dj-database-url
